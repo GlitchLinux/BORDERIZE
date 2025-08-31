@@ -72,19 +72,21 @@ df -h | borderize -FFD700
 
 <img width="1052" height="244" alt="borderize-diskusage" src="https://github.com/user-attachments/assets/d1f61214-f1c4-421b-a0c7-8a37938deb25" />
 
+### Combine with Other Tools
+
 ```bash
-# Process list with custom colors
-ps aux | head -10 | borderize -FFFFFF -00FF00
+# With figlet and lolcat for ASCII art
+figlet -f smslant BORDERIZE | borderize-neon | lolcat
 ```
 
-### Text Mode
-```bash
-# Direct text input
-borderize -t "Important Message" -FF0000 -FFFFFF
+<img width="662" height="338" alt="lolcat+figlet" src="https://github.com/user-attachments/assets/2dc5e948-6bec-4389-b7ac-debe05fe2771" />
 
+```bash
 # Multi-line text
 borderize -t "Line 1\nLine 2\nLine 3" -00FF00
 ```
+
+<img width="183" height="175" alt="line-borderize" src="https://github.com/user-attachments/assets/e6f12279-03f9-42c4-b832-6244f35036d4" />
 
 ### Command Mode
 ```bash
@@ -227,15 +229,6 @@ echo "TEST" | borderize -$(openssl rand -hex 3) -$(openssl rand -hex 3)
 ```bash
 # Monitor with borders updating every 2 seconds
 watch -n 2 'df -h | borderize -00FFFF'
-```
-
-### Combine with Other Tools
-```bash
-# With figlet for ASCII art
-figlet "HELLO" | borderize -FF00FF -00FFFF
-
-# With lolcat for rainbow effect (if installed)
-echo "RAINBOW" | borderize -FFFFFF | lolcat
 ```
 
 ### MOTD (Message of the Day)
