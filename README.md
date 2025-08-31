@@ -18,6 +18,22 @@ Transform your terminal output with stunning colored borders! A lightweight, dep
 - 🔧 **Multiple input modes** - Pipe, file, text, or interactive
 - 💻 **System-wide installation** - One command to rule them all
 
+### Basic Usage
+```bash
+# Simple text with default green border
+echo "Hello World" | borderize | lolcat
+```
+
+<img width="407" height="129" alt="lolcat-borderize" src="https://github.com/user-attachments/assets/95a655d1-f96d-45cd-94fe-dd4fb72a29a6" />
+
+```bash
+# Custom border color (hex)
+echo "Warning!" | borderize -FF0000
+```
+
+<img width="254" height="107" alt="borderize-warning" src="https://github.com/user-attachments/assets/bed008cd-edd3-457a-9c57-0489571f8c92" />
+
+
 ## 📥 Installation
 
 ### Quick Install (One-liner)
@@ -39,35 +55,20 @@ sudo mv borderize /usr/local/bin/
 # Verify installation
 borderize --help
 ```
-
-## 🚀 Quick Start
-
-### Basic Usage
-```bash
-# Simple text with default green border
-echo "Hello World" | borderize
-```
-
-<img width="407" height="129" alt="lolcat-borderize" src="https://github.com/user-attachments/assets/95a655d1-f96d-45cd-94fe-dd4fb72a29a6" />
-
-```bash
-# Custom border color (hex)
-echo "Warning!" | borderize -FF0000
-```
-
-<img width="254" height="107" alt="borderize-warning" src="https://github.com/user-attachments/assets/bed008cd-edd3-457a-9c57-0489571f8c92" />
-
-
 ## 🎯 Usage Examples
 
 ### Command Output Styling
 ```bash
 # System information with style
-uname -a | borderize -00FFFF
-
+uname -a | borderize -ffffff -FF00B8
+```
+<img width="1812" height="89" alt="uname-borderize" src="https://github.com/user-attachments/assets/5aaed7c0-ded1-4afa-aa39-791f7a7a9c03" />
+```bash
 # Disk usage with gold border
 df -h | borderize -FFD700
-
+```
+<img width="1052" height="244" alt="borderize-diskusage" src="https://github.com/user-attachments/assets/d1f61214-f1c4-421b-a0c7-8a37938deb25" />
+```bash
 # Process list with custom colors
 ps aux | head -10 | borderize -FFFFFF -00FF00
 ```
