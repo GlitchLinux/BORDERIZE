@@ -35,35 +35,22 @@ echo "Warning!" , "Alert!" , "Success!" | borderize -FF0000
 
 ##   Installation
 
-### Quick Install (One-liner)
-```bash
-sudo curl -L https://raw.githubusercontent.com/GlitchLinux/BORDERIZE/refs/heads/main/borderize -o /usr/local/bin/borderize
-sudo chmod +x /usr/local/bin/borderize
-```
+### Install
 
-### Manual Install
 ```bash
 # Download the script
 wget https://raw.githubusercontent.com/GlitchLinux/BORDERIZE/refs/heads/main/borderize
 
-# Make it executable
-chmod +x borderize
-
-# Move to PATH
-sudo mv borderize /usr/local/bin/
+# Make it executable & Move to PATH
+sudo chmod +x borderize && sudo mv borderize /usr/local/bin/
 
 # Verify installation
 borderize --help
 ```
+
 ##  Usage Examples
 
 ### Command Output Styling
-```bash
-# System information with style
-uname -a | borderize -ffffff -FF00B8
-```
-
-<img width="1812" height="89" alt="uname-borderize" src="https://github.com/user-attachments/assets/5aaed7c0-ded1-4afa-aa39-791f7a7a9c03" />
 
 ```bash
 # Disk usage with gold border
@@ -71,6 +58,12 @@ df -h | borderize -FFD700
 ```
 
 <img width="1052" height="244" alt="borderize-diskusage" src="https://github.com/user-attachments/assets/d1f61214-f1c4-421b-a0c7-8a37938deb25" />
+
+```bash
+# System information with style
+uname -a | borderize -ffffff -FF00B8
+```
+<img width="1812" height="89" alt="uname-borderize" src="https://github.com/user-attachments/assets/5aaed7c0-ded1-4afa-aa39-791f7a7a9c03" />
 
 ### Combine with Other Tools
 
