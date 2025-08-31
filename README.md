@@ -123,6 +123,9 @@ alias borderize-dark='borderize -333333 -FFFFFF'
 
 ### Popular Color Combinations
 
+<img width="1079" height="427" alt="lolcat-table" src="https://github.com/user-attachments/assets/1f102f8b-0311-461f-8b4b-895dcb892890" />
+
+
 | Style | Command | Description |
 |-------|---------|-------------|
 | **Error** | `-FF0000 -FFFFFF` | Red border, white text |
