@@ -46,14 +46,16 @@ borderize --help
 ```bash
 # Simple text with default green border
 echo "Hello World" | borderize
+```
 
-        <img width="407" height="129" alt="lolcat-borderize" src="https://github.com/user-attachments/assets/95a655d1-f96d-45cd-94fe-dd4fb72a29a6" />
+<img width="407" height="129" alt="lolcat-borderize" src="https://github.com/user-attachments/assets/95a655d1-f96d-45cd-94fe-dd4fb72a29a6" />
 
-
+```bash
 # Custom border color (hex)
 echo "Warning!" | borderize -FF0000
+```
 
-        <img width="254" height="107" alt="borderize-warning" src="https://github.com/user-attachments/assets/bed008cd-edd3-457a-9c57-0489571f8c92" />
+<img width="254" height="107" alt="borderize-warning" src="https://github.com/user-attachments/assets/bed008cd-edd3-457a-9c57-0489571f8c92" />
 
 
 ## 🎯 Usage Examples
