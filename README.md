@@ -62,12 +62,16 @@ borderize --help
 # System information with style
 uname -a | borderize -ffffff -FF00B8
 ```
+
 <img width="1812" height="89" alt="uname-borderize" src="https://github.com/user-attachments/assets/5aaed7c0-ded1-4afa-aa39-791f7a7a9c03" />
+
 ```bash
 # Disk usage with gold border
 df -h | borderize -FFD700
 ```
+
 <img width="1052" height="244" alt="borderize-diskusage" src="https://github.com/user-attachments/assets/d1f61214-f1c4-421b-a0c7-8a37938deb25" />
+
 ```bash
 # Process list with custom colors
 ps aux | head -10 | borderize -FFFFFF -00FF00
