@@ -6,7 +6,7 @@ Transform your terminal output with stunning colored borders! A lightweight, dep
 ![Bash](https://img.shields.io/badge/bash-5.0%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-purple)
 
-<img width="759" height="1586" alt="image" src="https://github.com/user-attachments/assets/05b65752-7bc3-470f-9614-18c555695642" />
+<img width="759" height="1573" alt="borderize" src="https://github.com/user-attachments/assets/a49cf7c9-ce56-47e9-845d-0280795edcf3" />
 
 
 ## ✨ Features
