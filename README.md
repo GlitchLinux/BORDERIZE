@@ -31,7 +31,7 @@ echo "Hello World" | borderize | lolcat
 echo "Warning!" | borderize -FF0000
 ```
 
-<img width="254" height="107" alt="borderize-warning" src="https://github.com/user-attachments/assets/bed008cd-edd3-457a-9c57-0489571f8c92" /> <img width="300" height="131" alt="borderize-success" src="https://github.com/user-attachments/assets/300d3bb6-625f-482b-9d8d-1814e373dcd9" /> <img width="248" height="124" alt="borderize-alert" src="https://github.com/user-attachments/assets/19cf6a4e-56d2-4770-bb81-372ef7ab9c2a" />
+ <img width="300" height="131" alt="borderize-success" src="https://github.com/user-attachments/assets/300d3bb6-625f-482b-9d8d-1814e373dcd9" /> <img width="248" height="124" alt="borderize-alert" src="https://github.com/user-attachments/assets/19cf6a4e-56d2-4770-bb81-372ef7ab9c2a" /> <img width="254" height="107" alt="borderize-warning" src="https://github.com/user-attachments/assets/bed008cd-edd3-457a-9c57-0489571f8c92" />
 
 
 
