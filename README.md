@@ -6,8 +6,7 @@ Transform your terminal output with stunning colored borders! A lightweight, dep
 ![Bash](https://img.shields.io/badge/bash-5.0%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-purple)
 
-<img width="759" height="1573" alt="borderize" src="https://github.com/user-attachments/assets/a49cf7c9-ce56-47e9-845d-0280795edcf3" />
-
+<img width="745" height="241" alt="borderize-figlet2" src="https://github.com/user-attachments/assets/93261655-152a-4854-85d8-2de9c900955a" />
 
 ## ✨ Features
 
@@ -48,12 +47,14 @@ borderize --help
 # Simple text with default green border
 echo "Hello World" | borderize
 
+        <img width="407" height="129" alt="lolcat-borderize" src="https://github.com/user-attachments/assets/95a655d1-f96d-45cd-94fe-dd4fb72a29a6" />
+
+
 # Custom border color (hex)
 echo "Warning!" | borderize -FF0000
 
-# Border AND text color
-echo "NEON STYLE" | borderize -FF00FF -00FFFF
-```
+        <img width="254" height="107" alt="borderize-warning" src="https://github.com/user-attachments/assets/bed008cd-edd3-457a-9c57-0489571f8c92" />
+
 
 ## 🎯 Usage Examples
 
