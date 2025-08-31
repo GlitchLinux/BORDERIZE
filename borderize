@@ -1,0 +1,257 @@
+#!/bin/bash
+
+# Default color definitions
+DEFAULT_GREEN='\033[1;32m'
+PINK='\033[1;35m'
+NC='\033[0m' # No Color
+
+# Function to convert hex to RGB and then to ANSI
+hex_to_ansi() {
+    local hex="$1"
+    
+    # Remove # if present
+    hex="${hex#\#}"
+    
+    # Validate hex format
+    if [[ ! "$hex" =~ ^[0-9A-Fa-f]{6}$ ]]; then
+        # If invalid hex, return default green
+        echo "$DEFAULT_GREEN"
+        return
+    fi
+    
+    # Convert hex to RGB
+    local r=$((16#${hex:0:2}))
+    local g=$((16#${hex:2:2}))
+    local b=$((16#${hex:4:2}))
+    
+    # Return ANSI escape code for 24-bit color
+    echo -e "\033[38;2;${r};${g};${b}m"
+}
+
+# Function to calculate the visual width of a string (accounting for ANSI codes)
+get_visual_width() {
+    local str="$1"
+    # Remove ANSI escape sequences for width calculation
+    local clean_str=$(echo -e "$str" | sed 's/\x1b\[[0-9;]*m//g')
+    echo "${#clean_str}"
+}
+
+# Function to pad string to desired width
+pad_string() {
+    local str="$1"
+    local desired_width="$2"
+    local current_width=$(get_visual_width "$str")
+    local padding=$((desired_width - current_width))
+    
+    if [ $padding -gt 0 ]; then
+        printf "%s%*s" "$str" $padding ""
+    else
+        echo -n "$str"
+    fi
+}
+
+# Function to create bordered text
+borderize_text() {
+    local border_color="$1"
+    local lines=()
+    local max_width=0
+    local has_variables=false
+    
+    # Read all lines into array
+    while IFS= read -r line || [ -n "$line" ]; do
+        lines+=("$line")
+        
+        # Check if line contains $ (indicating variables)
+        if [[ "$line" == *'$'* ]]; then
+            has_variables=true
+        fi
+        
+        local width=$(get_visual_width "$line")
+        if [ $width -gt $max_width ]; then
+            max_width=$width
+        fi
+    done
+    
+    # If no input, return
+    if [ ${#lines[@]} -eq 0 ]; then
+        return
+    fi
+    
+    # Add padding for borders (2 spaces on each side)
+    local inner_width=$((max_width + 2))
+    
+    echo " "
+    
+    if [ "$has_variables" = true ]; then
+        # Dynamic border for variable content
+        echo -e "${border_color}╭$(printf '─%.0s' $(seq 1 $inner_width))❖${NC}"
+        
+        for line in "${lines[@]}"; do
+            echo -e "${border_color}│${NC} ${line}"
+        done
+        
+        echo -e "${border_color}╰$(printf '─%.0s' $(seq 1 $inner_width))❖${NC}"
+    else
+        # Fixed border for static content
+        echo -e "${border_color}╭$(printf '─%.0s' $(seq 1 $inner_width))╮${NC}"
+        
+        for line in "${lines[@]}"; do
+            local padded_line=$(pad_string "$line" $max_width)
+            echo -e "${border_color}│${NC} ${padded_line} ${border_color}│${NC}"
+        done
+        
+        echo -e "${border_color}╰$(printf '─%.0s' $(seq 1 $inner_width))╯${NC}"
+    fi
+    
+    echo " "
+}
+
+# Function to show usage
+show_usage() {
+    local border_color="${1:-$DEFAULT_GREEN}"
+    
+    echo " "
+    echo -e "${border_color}╭─────────────────────────────────────────╮${NC}"
+    echo -e "${border_color}│${NC}  Borderize - Text Border Utility       ${border_color}│${NC}"
+    echo -e "${border_color}│${NC}  Creates beautiful borders around text ${border_color}│${NC}"
+    echo -e "${border_color}╰─────────────────────────────────────────╯${NC}"
+    echo " "
+    echo -e "${DEFAULT_GREEN}╭──────────────────────────────────────────────╮${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC} ${PINK}Usage Examples:${NC}                             ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}                                              ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC} ${PINK}1${NC}. Default green border:                    ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    echo \"text\" | borderize                  ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}                                              ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC} ${PINK}2${NC}. Custom hex color border:                 ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    echo \"text\" | borderize -FF0000          ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    echo \"text\" | borderize -#00FF00         ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    echo \"text\" | borderize -0080FF          ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}                                              ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC} ${PINK}3${NC}. Common color examples:                   ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -FFFFFF  (white)                         ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -FF0000  (red)                           ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -00FF00  (green)                         ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -0000FF  (blue)                          ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -FFFF00  (yellow)                        ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -FF00FF  (magenta)                       ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -00FFFF  (cyan)                          ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -FFA500  (orange)                        ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -800080  (purple)                        ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}                                              ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC} ${PINK}4${NC}. With other options:                      ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    borderize -t \"text\" -FF00FF              ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    borderize -c \"ls -la\" -00FFFF            ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}                                              ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC} ${PINK}Options:${NC}                                    ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -h, --help     Show this help message    ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -t \"text\"      Borderize given text      ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -c command     Borderize command output  ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}│${NC}    -RRGGBB        Set border color (hex)    ${DEFAULT_GREEN}│${NC}"
+    echo -e "${DEFAULT_GREEN}╰──────────────────────────────────────────────╯${NC}"
+    echo " "
+}
+
+# Main script logic
+main() {
+    local border_color="$DEFAULT_GREEN"
+    local text_mode=false
+    local command_mode=false
+    local input_text=""
+    local input_command=""
+    
+    # Parse all arguments
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -h|--help)
+                show_usage
+                exit 0
+                ;;
+            -t|--text)
+                text_mode=true
+                shift
+                if [ -z "$1" ]; then
+                    echo "Error: No text provided"
+                    exit 1
+                fi
+                input_text="$1"
+                shift
+                ;;
+            -c|--command)
+                command_mode=true
+                shift
+                # Collect the rest as command
+                input_command="$*"
+                break
+                ;;
+            -[0-9A-Fa-f]*)
+                # Hex color code
+                local hex_code="${1#-}"
+                border_color=$(hex_to_ansi "$hex_code")
+                shift
+                ;;
+            -#[0-9A-Fa-f]*)
+                # Hex color code with #
+                local hex_code="${1#-}"
+                border_color=$(hex_to_ansi "$hex_code")
+                shift
+                ;;
+            *)
+                # Check if it's a file
+                if [ -f "$1" ]; then
+                    cat "$1" | borderize_text "$border_color"
+                    exit 0
+                else
+                    # Check if it looks like a hex color without dash
+                    if [[ "$1" =~ ^[0-9A-Fa-f]{6}$ ]] || [[ "$1" =~ ^#[0-9A-Fa-f]{6}$ ]]; then
+                        border_color=$(hex_to_ansi "$1")
+                        shift
+                    else
+                        echo "Error: Unknown option or file not found: $1"
+                        echo "Use -h for help"
+                        exit 1
+                    fi
+                fi
+                ;;
+        esac
+    done
+    
+    # Execute based on mode
+    if [ "$text_mode" = true ]; then
+        echo -e "$input_text" | borderize_text "$border_color"
+    elif [ "$command_mode" = true ]; then
+        if [ -z "$input_command" ]; then
+            echo "Error: No command provided"
+            exit 1
+        fi
+        eval "$input_command" | borderize_text "$border_color"
+    else
+        # No specific mode - check for piped input or interactive
+        if [ -t 0 ]; then
+            # No pipe input - interactive mode
+            echo " "
+            echo -e "${border_color}╭────────────────────────────────────────╮${NC}"
+            echo -e "${border_color}│${NC} Interactive Mode                       ${border_color}│${NC}"
+            echo -e "${border_color}│${NC} Type or paste text, press Ctrl+D when ${border_color}│${NC}"
+            echo -e "${border_color}│${NC} finished to add border                ${border_color}│${NC}"
+            echo -e "${border_color}╰────────────────────────────────────────╯${NC}"
+            echo " "
+            read -p " -> " -d '' input
+            echo -e "$input" | borderize_text "$border_color"
+        else
+            # Pipe input detected
+            borderize_text "$border_color"
+        fi
+    fi
+}
+
+# Script execution steps:
+# 1. Parse command line arguments including hex colors
+# 2. Convert hex colors to ANSI escape codes
+# 3. Detect input method (pipe/file/text/interactive)
+# 4. Read and process input text
+# 5. Calculate optimal border width
+# 6. Generate bordered output with custom color
+# 7. Display result with specified border color
+
+# Run main function
+main "$@"
