@@ -230,13 +230,20 @@ main() {
             # No pipe input - interactive mode
             echo " "
             echo -e "${border_color}╭────────────────────────────────────────╮${NC}"
-            echo -e "${border_color}│${NC} Interactive Mode                       ${border_color}│${NC}"
-            echo -e "${border_color}│${NC} Type or paste text, press Ctrl+D when ${border_color}│${NC}"
-            echo -e "${border_color}│${NC} finished to add border                ${border_color}│${NC}"
+            echo -e "${border_color}│${NC}   Interactive borderize Mode    ${border_color}│${NC}"
+            echo -e "${border_color}│${NC} Type or paste text, Ctrl+D when ${border_color}│${NC}"
+            echo -e "${border_color}│${NC}   finished to add the border    ${border_color}│${NC}"
             echo -e "${border_color}╰────────────────────────────────────────╯${NC}"
             echo " "
-            read -p " -> " -d '' input
-            echo -e "$input" | borderize_text "$border_color"
+            echo -n " -> "
+            # Read all input until EOF (Ctrl+D)
+            input=$(cat)
+            # Add newline after input capture
+            echo ""
+            # Process the input if not empty
+            if [ -n "$input" ]; then
+                echo -e "$input" | borderize_text "$border_color"
+            fi
         else
             # Pipe input detected
             borderize_text "$border_color"
