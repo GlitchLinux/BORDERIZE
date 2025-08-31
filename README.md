@@ -35,8 +35,6 @@ echo "Warning!" , "Alert!" , "Success!" | borderize -FF0000
 
 ##   Installation
 
-### Install
-
 ```bash
 # Download the script
 wget https://raw.githubusercontent.com/GlitchLinux/BORDERIZE/refs/heads/main/borderize
