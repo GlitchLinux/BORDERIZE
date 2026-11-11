@@ -1,4 +1,4 @@
-# 🎨 BORDERIZE - Beautiful Terminal Text Borders
+#  BORDERIZE - Beautiful Terminal Text Borders
 
 Transform your terminal output with stunning colored borders! A lightweight, dependency-free bash utility that makes your scripts, logs, and command outputs visually organized and eye-catching.
 
@@ -8,15 +8,15 @@ Transform your terminal output with stunning colored borders! A lightweight, dep
 
 <img width="745" height="241" alt="borderize-figlet2" src="https://github.com/user-attachments/assets/93261655-152a-4854-85d8-2de9c900955a" />
 
-## ✨ Features
+##  Features
 
-- 🚀 **Instant beautification** - Pipe any text or command through borderize
-- 🎨 **Dual color support** - Customize both border AND text colors
-- 🌈 **16.7 million colors** - Full 24-bit color (hex code) support
-- 📦 **Zero dependencies** - Pure bash, works everywhere
-- ⚡ **Lightning fast** - No overhead, instant rendering
-- 🔧 **Multiple input modes** - Pipe, file, text, or interactive
-- 💻 **System-wide installation** - One command to rule them all
+-  **Instant beautification** - Pipe any text or command through borderize
+-  **Dual color support** - Customize both border AND text colors
+-  **16.7 million colors** - Full 24-bit color (hex code) support
+-  **Zero dependencies** - Pure bash, works everywhere
+-  **Lightning fast** - No overhead, instant rendering
+-  **Multiple input modes** - Pipe, file, text, or interactive
+-  **System-wide installation** - One command to rule them all
 
 ### Basic Usage
 ```bash
